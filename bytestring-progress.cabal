@@ -1,5 +1,5 @@
 Name: bytestring-progress
-Version: 1.0.2
+Version: 1.0.2.1
 Build-Type: Simple
 Cabal-Version: >= 1.6
 License: BSD3
@@ -15,6 +15,8 @@ Description:
   consumed. Typically, this could be to report some measure of progress
   to a waiting user, but it could also be to perform some form of testing
   on input / consumption code.
+
+data-files: Example.hs
 
 Library
   Build-Depends: base >= 4.0 && < 5.0,
