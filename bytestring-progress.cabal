@@ -1,5 +1,5 @@
 Name: bytestring-progress
-Version: 1.0.2.1
+Version: 1.0.3
 Build-Type: Simple
 Cabal-Version: >= 1.6
 License: BSD3
@@ -18,11 +18,20 @@ Description:
 
 data-files: Example.hs
 
+Flag use-system-progressbar
+  Description: Enable integration with the terminal-progress-bar library.
+  Default: True
+
 Library
   Build-Depends: base >= 4.0 && < 5.0,
                  time >= 1.1 && < 1.5,
                  bytestring >= 0.9 && < 1.0
   Exposed-Modules: Data.ByteString.Lazy.Progress
+
+  if flag(use-system-progressbar)
+    Build-Depends: terminal-progress-bar >= 0.0.1 && < 0.0.2
+    Exposed-Modules: System.ProgressBar.ByteString
+
 
 source-repository head
   type: git
