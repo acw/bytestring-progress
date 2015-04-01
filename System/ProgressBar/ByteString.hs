@@ -18,12 +18,12 @@ type ℤ = Integer
 -- This is the most general version in the library, and will render a progress
 -- string and pass it to the given function. See other functions for interacting
 -- with fixed-size files, the console, or generic Handles.
-mkByteStringProgressBar :: ByteString -> -- ^ The ByteString to track.
-                           (String -> IO ()) -> -- ^ Function to call on update.
-                           ℤ -> -- ^ Progress bar width
-                           ℤ -> -- ^ The size of the ByteString
-                           Label -> -- ^ Prefixed label
-                           Label -> -- ^ Postfixed label
+mkByteStringProgressBar :: ByteString {- The ByteString to track. -} ->
+                           (String -> IO ()) {- ^Function to call on update.-}->
+                           ℤ     {- ^ Progress bar width -}         ->
+                           ℤ     {- ^ The size of the ByteString -} ->
+                           Label {- ^ Prefixed label -}             ->
+                           Label {- ^ Postfixed label -}            ->
                            IO ByteString
 mkByteStringProgressBar input tracker width size prefix postfix =
   trackProgressWithChunkSize bestSize updateFunction input
@@ -37,12 +37,12 @@ mkByteStringProgressBar input tracker width size prefix postfix =
 
 -- |As mkByteStringProgressBar, but simply print the output to the given
 -- Handle instead of using a callback.
-mkByteStringProgressWriter :: ByteString -> -- ^ The ByteString to track.
-                              Handle -> -- ^ Handle to write to
-                              ℤ -> -- ^ Progress bar width
-                              ℤ -> -- ^ The size of the ByteString
-                              Label -> -- ^ Prefixed label
-                              Label -> -- ^ Postfixed label
+mkByteStringProgressWriter :: ByteString {- ^ The ByteString to track. -} ->
+                              Handle {- ^ Handle to write to -} ->
+                              ℤ {- ^ Progress bar width -} ->
+                              ℤ {- ^ The size of the ByteString -} ->
+                              Label {- ^ Prefixed label -} ->
+                              Label {- ^ Postfixed label -} ->
                               IO ByteString
 mkByteStringProgressWriter input handle width size prefix postfix = do
   hSetBuffering handle NoBuffering
@@ -53,11 +53,11 @@ mkByteStringProgressWriter input handle width size prefix postfix = do
 -- |Track the loading of a file as it is consumed by some computation. The
 -- use of this function should be essentially similar to ByteString's
 -- readFile, but with a lot more arguments and side effects.
-fileReadProgressBar :: FilePath -> -- ^ The file to load.
-                       (String -> IO ()) -> -- ^ Function to call on update.
-                       ℤ -> -- ^ Progress bar width
-                       Label -> -- ^ Prefixed label
-                       Label -> -- ^ Postfixed label
+fileReadProgressBar :: FilePath {- ^ The file to load. -} ->
+                       (String -> IO ()) {- ^ Function to call on update. -} ->
+                       ℤ {- ^ Progress bar width -} ->
+                       Label {- ^ Prefixed label -} ->
+                       Label {- ^ Postfixed label -} ->
                        IO ByteString
 fileReadProgressBar path tracker width prefix postfix = do
   inHandle   <- openFile path ReadMode
@@ -67,11 +67,11 @@ fileReadProgressBar path tracker width prefix postfix = do
 
 -- |As fileReadProgressBar, but simply write the progress bar to the given
 -- Handle instead of calling a generic function.
-fileReadProgressWriter :: FilePath -> -- ^ The file to load.
-                          Handle -> -- ^ Handle to write to
-                          ℤ -> -- ^ Progress bar width
-                          Label -> -- ^ Prefixed label
-                          Label -> -- ^ Postfixed label
+fileReadProgressWriter :: FilePath {- ^ The file to load. -} ->
+                          Handle {- ^ Handle to write to -} ->
+                          ℤ {- ^ Progress bar width -} ->
+                          Label {- ^ Prefixed label -} ->
+                          Label {- ^ Postfixed label -} ->
                           IO ByteString
 fileReadProgressWriter path handle width prefix postfix = do
   inHandle   <- openFile path ReadMode
