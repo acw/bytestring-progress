@@ -10,7 +10,7 @@ import Data.ByteString.Lazy(ByteString,hGetContents)
 import Data.ByteString.Lazy.Progress
 import System.IO(Handle,hSetBuffering,hPutChar,hPutStr,BufferMode(..))
 import System.IO(openFile,hFileSize,IOMode(..))
-import System.ProgressBar
+import System.ProgressBar(Label, mkProgressBar)
 
 type ℤ = Integer
 
