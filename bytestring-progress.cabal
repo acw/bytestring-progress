@@ -1,5 +1,5 @@
 Name: bytestring-progress
-Version: 1.0.9
+Version: 1.2
 Build-Type: Simple
 Cabal-Version: >= 1.6
 License: BSD3
@@ -29,7 +29,7 @@ Library
   Exposed-Modules: Data.ByteString.Lazy.Progress
 
   if flag(use-system-progressbar)
-    Build-Depends: terminal-progress-bar >= 0.0.1 && < 0.1.2
+    Build-Depends: terminal-progress-bar >= 0.2 && < 0.3
     Exposed-Modules: System.ProgressBar.ByteString
 
 

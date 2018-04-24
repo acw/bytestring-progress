@@ -10,7 +10,7 @@ import Data.ByteString.Lazy(ByteString,hGetContents)
 import Data.ByteString.Lazy.Progress
 import System.IO(Handle,hSetBuffering,hPutChar,hPutStr,BufferMode(..))
 import System.IO(openFile,hFileSize,IOMode(..))
-import System.ProgressBar(Label, mkProgressBar)
+import System.ProgressBar(Label, Progress(Progress), mkProgressBar)
 
 type ℤ = Integer
 
@@ -33,7 +33,7 @@ mkByteStringProgressBar input tracker width size prefix postfix =
            | otherwise              = 16384
   updateProgressBar                 = mkProgressBar prefix postfix width
   updateFunction _ now              =
-    tracker $ updateProgressBar (fromIntegral now) size
+    tracker $ updateProgressBar (Progress (fromIntegral now) size)
 
 -- |As mkByteStringProgressBar, but simply print the output to the given
 -- Handle instead of using a callback.
